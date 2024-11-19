@@ -1,0 +1,41 @@
+version: 2
+
+sources:
+  - name: snowflake_sd
+    database: snowflake_sample_data
+    schema: tpch_sf1
+    tables:
+      - name: customer
+        columns:
+          - name: c_custkey
+            tests:
+              - unique
+              - not_null
+
+
+      - name: orders
+        columns:
+          - name: o_orderkey
+            tests:
+              - unique
+              - not_null
+          - name: o_custkey
+            tests:
+              - relationships:
+                  field: c_custkey
+                  to: source('snowflake_sd','customer')
+        
+      - name: lineitem
+        columns:
+          - name: l_orderkey
+            tests:
+              - unique
+              - not_null
+              - relationships:
+                  to: source('snowflake_sd', 'customer')
+                  field: field_name
+
+
+
+                  
+              
