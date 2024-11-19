@@ -13,7 +13,7 @@ sources:
               - not_null
       - name: lineitem
         columns:
-          - name: l-orderkey
+          - name: L_ORDERKEY
             tests:
               - relationships:
                   to: source('tpch', 'orders')
